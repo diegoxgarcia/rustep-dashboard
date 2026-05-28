@@ -43,12 +43,12 @@ export default function StaminaPage() {
       const params = new URLSearchParams({ page: String(page), limit: '20' })
       if (type) params.set('type', type)
       const res = await fetch(`/api/stamina?${params}`)
-      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
       const json = await res.json()
+      if (!res.ok) throw new Error(json.detail || json.error || `Error ${res.status}`)
       setData(json)
     } catch (err) {
       console.error('Error fetching stamina:', err)
-      setError('No se pudo cargar el ledger de stamina. Verificá la conexión a la base de datos.')
+      setError(err instanceof Error ? err.message : 'Error desconocido en stamina')
     } finally {
       setLoading(false)
     }

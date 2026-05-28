@@ -17,38 +17,46 @@ export async function GET(request: NextRequest) {
   const where = type ? { type } : {}
   const skip = (page - 1) * limit
 
-  const [entries, total, byType, weeklyData] = await Promise.all([
-    prisma.staminaLedger.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      skip,
-      take: limit,
-    }),
-    prisma.staminaLedger.count({ where }),
-    prisma.staminaLedger.groupBy({
-      by: ['type'],
-      _sum: { amount: true },
-      _count: true,
-    }),
-    prisma.$queryRaw<{ week: string; credited: number; debited: number }[]>`
-      SELECT
-        TO_CHAR(DATE_TRUNC('week', created_at), 'YYYY-WW') AS week,
-        COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS credited,
-        COALESCE(ABS(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END)), 0) AS debited
-      FROM stamina_ledger
-      WHERE created_at >= NOW() - INTERVAL '8 weeks'
-      GROUP BY DATE_TRUNC('week', created_at)
-      ORDER BY DATE_TRUNC('week', created_at) ASC
-    `,
-  ])
+  try {
+    const [entries, total, byType, weeklyData] = await Promise.all([
+      prisma.staminaLedger.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: limit,
+      }),
+      prisma.staminaLedger.count({ where }),
+      prisma.staminaLedger.groupBy({
+        by: ['type'],
+        _sum: { amount: true },
+        _count: true,
+      }),
+      prisma.$queryRaw<{ week: string; credited: number; debited: number }[]>`
+        SELECT
+          TO_CHAR(DATE_TRUNC('week', created_at), 'YYYY-WW') AS week,
+          COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS credited,
+          COALESCE(ABS(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END)), 0) AS debited
+        FROM stamina_ledger
+        WHERE created_at >= NOW() - INTERVAL '8 weeks'
+        GROUP BY DATE_TRUNC('week', created_at)
+        ORDER BY DATE_TRUNC('week', created_at) ASC
+      `,
+    ])
 
-  return NextResponse.json({
-    data: entries,
-    total,
-    page,
-    limit,
-    totalPages: Math.ceil(total / limit),
-    byType,
-    weeklyData,
-  })
+    return NextResponse.json({
+      data: entries,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+      byType,
+      weeklyData,
+    })
+  } catch (error) {
+    console.error('[API /stamina] Prisma error:', error)
+    return NextResponse.json(
+      { error: 'Database error', detail: error instanceof Error ? error.message : String(error) },
+      { status: 500 }
+    )
+  }
 }
