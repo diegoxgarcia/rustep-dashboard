@@ -1,4 +1,6 @@
-import { auth } from '@/lib/auth'
+'use client'
+
+import { useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
 import { signOutAction } from '@/lib/actions'
@@ -8,8 +10,8 @@ interface HeaderProps {
   description?: string
 }
 
-export async function Header({ title, description }: HeaderProps) {
-  const session = await auth()
+export function Header({ title, description }: HeaderProps) {
+  const { data: session } = useSession()
 
   return (
     <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6">
