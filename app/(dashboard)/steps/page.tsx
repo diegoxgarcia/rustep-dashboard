@@ -13,17 +13,26 @@ type StepsLogWithUser = Omit<IStepsLog, 'userId'> & { userId: IUser }
 export default function StepsPage() {
   const [data, setData] = useState<{ data: StepsLogWithUser[]; total: number; totalPages: number } | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [confidenceStatus, setConfidenceStatus] = useState('')
 
   const fetchSteps = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ page: String(page), limit: '20' })
-    if (confidenceStatus) params.set('confidenceStatus', confidenceStatus)
-    const res = await fetch(`/api/steps?${params}`)
-    const json = await res.json()
-    setData(json)
-    setLoading(false)
+    setError(null)
+    try {
+      const params = new URLSearchParams({ page: String(page), limit: '20' })
+      if (confidenceStatus) params.set('confidenceStatus', confidenceStatus)
+      const res = await fetch(`/api/steps?${params}`)
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      console.error('Error fetching steps:', err)
+      setError('No se pudieron cargar las sesiones. Verificá la conexión a la base de datos.')
+    } finally {
+      setLoading(false)
+    }
   }, [page, confidenceStatus])
 
   useEffect(() => { fetchSteps() }, [fetchSteps])
@@ -49,6 +58,9 @@ export default function StepsPage() {
           </Select>
         </div>
 
+        {error && (
+          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+        )}
         {loading ? (
           <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
         ) : (

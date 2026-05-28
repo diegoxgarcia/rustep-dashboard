@@ -32,17 +32,26 @@ const typeLabels: Record<string, string> = {
 export default function StaminaPage() {
   const [data, setData] = useState<StaminaData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [type, setType] = useState('')
 
   const fetchStamina = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ page: String(page), limit: '20' })
-    if (type) params.set('type', type)
-    const res = await fetch(`/api/stamina?${params}`)
-    const json = await res.json()
-    setData(json)
-    setLoading(false)
+    setError(null)
+    try {
+      const params = new URLSearchParams({ page: String(page), limit: '20' })
+      if (type) params.set('type', type)
+      const res = await fetch(`/api/stamina?${params}`)
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      console.error('Error fetching stamina:', err)
+      setError('No se pudo cargar el ledger de stamina. Verificá la conexión a la base de datos.')
+    } finally {
+      setLoading(false)
+    }
   }, [page, type])
 
   useEffect(() => { fetchStamina() }, [fetchStamina])
@@ -51,7 +60,10 @@ export default function StaminaPage() {
     <div>
       <Header title="Stamina" description="Ledger de todas las transacciones de stamina" />
       <div className="p-6 space-y-6">
-        {data?.byType && (
+        {error && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+      )}
+      {data?.byType && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {data.byType.map((entry) => (
               <Card key={entry.type}>

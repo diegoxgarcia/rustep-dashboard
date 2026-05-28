@@ -19,17 +19,26 @@ interface FraudData {
 export default function FraudPage() {
   const [data, setData] = useState<FraudData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [reviewStatus, setReviewStatus] = useState('')
 
   const fetchFraud = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ page: String(page), limit: '20' })
-    if (reviewStatus) params.set('reviewStatus', reviewStatus)
-    const res = await fetch(`/api/fraud?${params}`)
-    const json = await res.json()
-    setData(json)
-    setLoading(false)
+    setError(null)
+    try {
+      const params = new URLSearchParams({ page: String(page), limit: '20' })
+      if (reviewStatus) params.set('reviewStatus', reviewStatus)
+      const res = await fetch(`/api/fraud?${params}`)
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      console.error('Error fetching fraud flags:', err)
+      setError('No se pudieron cargar los casos de fraude. Verificá la conexión a la base de datos.')
+    } finally {
+      setLoading(false)
+    }
   }, [page, reviewStatus])
 
   useEffect(() => { fetchFraud() }, [fetchFraud])
@@ -56,6 +65,9 @@ export default function FraudPage() {
           </Select>
         </div>
 
+        {error && (
+          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+        )}
         {loading ? (
           <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
         ) : (

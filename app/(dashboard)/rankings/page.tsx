@@ -35,17 +35,26 @@ export default function RankingsPage() {
   const now = new Date()
   const [data, setData] = useState<RankingEntry[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [category, setCategory] = useState('WEEKLY_STEPS')
   const [week, setWeek] = useState(String(getWeekNumber(now)))
   const [year, setYear] = useState(String(now.getFullYear()))
 
   const fetchRankings = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ category, week, year })
-    const res = await fetch(`/api/rankings?${params}`)
-    const json = await res.json()
-    setData(json.data || [])
-    setLoading(false)
+    setError(null)
+    try {
+      const params = new URLSearchParams({ category, week, year })
+      const res = await fetch(`/api/rankings?${params}`)
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
+      const json = await res.json()
+      setData(json.data || [])
+    } catch (err) {
+      console.error('Error fetching rankings:', err)
+      setError('No se pudieron cargar los rankings. Verificá la conexión a la base de datos.')
+    } finally {
+      setLoading(false)
+    }
   }, [category, week, year])
 
   useEffect(() => { fetchRankings() }, [fetchRankings])
@@ -91,6 +100,9 @@ export default function RankingsPage() {
           </div>
         </div>
 
+        {error && (
+          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+        )}
         {loading ? (
           <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
         ) : data.length === 0 ? (

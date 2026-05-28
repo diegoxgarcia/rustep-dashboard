@@ -12,6 +12,7 @@ import { Search, ChevronLeft, ChevronRight } from 'lucide-react'
 export function UsersTable() {
   const [data, setData] = useState<PaginatedResponse<IUser> | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [searchInput, setSearchInput] = useState('')
@@ -21,15 +22,22 @@ export function UsersTable() {
 
   const fetchUsers = useCallback(async () => {
     setLoading(true)
-    const params = new URLSearchParams({ page: String(page), limit: '20' })
-    if (search) params.set('search', search)
-    if (accountStatus) params.set('accountStatus', accountStatus)
-    if (activityCategory) params.set('activityCategory', activityCategory)
-
-    const res = await fetch(`/api/users?${params}`)
-    const json = await res.json()
-    setData(json)
-    setLoading(false)
+    setError(null)
+    try {
+      const params = new URLSearchParams({ page: String(page), limit: '20' })
+      if (search) params.set('search', search)
+      if (accountStatus) params.set('accountStatus', accountStatus)
+      if (activityCategory) params.set('activityCategory', activityCategory)
+      const res = await fetch(`/api/users?${params}`)
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`)
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      console.error('Error fetching users:', err)
+      setError('No se pudieron cargar los usuarios. Verificá la conexión a la base de datos.')
+    } finally {
+      setLoading(false)
+    }
   }, [page, search, accountStatus, activityCategory])
 
   useEffect(() => { fetchUsers() }, [fetchUsers])
@@ -99,6 +107,10 @@ export function UsersTable() {
           </SelectContent>
         </Select>
       </div>
+
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+      )}
 
       {loading ? (
         <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
