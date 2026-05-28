@@ -3,6 +3,12 @@ import { Header } from '@/components/layout/header'
 import { UserDetail } from '@/components/users/user-detail'
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
+import connectToMongoDB from '@/lib/mongodb'
+import prisma from '@/lib/prisma'
+import User from '@/lib/models/user.model'
+import StepsLog from '@/lib/models/steps-log.model'
+import FraudFlag from '@/lib/models/fraud-flag.model'
+import mongoose from 'mongoose'
 
 interface UserPageProps {
   params: { id: string }
@@ -10,11 +16,48 @@ interface UserPageProps {
 
 async function getUserDetail(id: string) {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3001'
-    const res = await fetch(`${baseUrl}/api/users/${id}`, { cache: 'no-store' })
-    if (res.status === 404) return null
-    if (!res.ok) throw new Error('Failed to fetch user')
-    return res.json()
+    if (!mongoose.isValidObjectId(id)) return null
+
+    await connectToMongoDB()
+
+    const [user, stepsLogs, fraudFlag, staminaTransactions, stepsAgg] = await Promise.all([
+      User.findById(id).lean(),
+      StepsLog.find({ userId: id }).sort({ createdAt: -1 }).limit(20).lean(),
+      FraudFlag.findOne({ userId: id }).lean(),
+      prisma.staminaLedger.findMany({
+        where: { userId: id },
+        orderBy: { createdAt: 'desc' },
+        take: 20,
+      }),
+      StepsLog.aggregate([
+        {
+          $match: {
+            userId: new mongoose.Types.ObjectId(id),
+            confidenceStatus: { $ne: 'blocked' },
+          },
+        },
+        { $group: { _id: null, totalSteps: { $sum: '$stepsCount' }, totalSessions: { $sum: 1 } } },
+      ]),
+    ])
+
+    if (!user) return null
+
+    const staminaAgg = await prisma.staminaLedger.aggregate({
+      where: { userId: id },
+      _sum: { amount: true },
+    })
+
+    return {
+      user,
+      stepsLogs,
+      fraudFlag,
+      staminaTransactions,
+      stats: {
+        totalSteps: stepsAgg[0]?.totalSteps ?? 0,
+        totalSessions: stepsAgg[0]?.totalSessions ?? 0,
+        totalStamina: staminaAgg._sum.amount ?? 0,
+      },
+    }
   } catch {
     return null
   }
