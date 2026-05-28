@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ['lh3.googleusercontent.com', 'api.dicebear.com'],
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3001'],
+    },
+  },
+}
 
-export default nextConfig;
+export default nextConfig

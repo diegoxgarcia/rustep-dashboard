@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StaminaLedger {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id") @db.VarChar(255)
+  amount      Int
+  type        TransactionType
+  referenceId String?  @map("reference_id") @db.VarChar(255)
+  description String?  @db.VarChar(500)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([type])
+  @@map("stamina_ledger")
+}
+
+enum TransactionType {
+  STEPS_CREDIT
+  DAILY_BONUS
+  WEEKLY_BONUS
+  FRIEND_BONUS
+  REWARD_DEBIT
+  ADMIN_ADJUSTMENT
+  REFUND
+}
+
+model Friendship {
+  id           String           @id @default(uuid())
+  requesterId  String           @map("requester_id") @db.VarChar(255)
+  addresseeId  String           @map("addressee_id") @db.VarChar(255)
+  status       FriendshipStatus @default(PENDING)
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+
+  @@unique([requesterId, addresseeId])
+  @@index([requesterId])
+  @@index([addresseeId])
+  @@map("friendships")
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+  REJECTED
+}
+
+model RunningGroup {
+  id          String       @id @default(uuid())
+  name        String       @db.VarChar(100)
+  description String?      @db.Text
+  creatorId   String       @map("creator_id") @db.VarChar(255)
+  privacy     GroupPrivacy @default(PUBLIC)
+  maxMembers  Int          @default(50) @map("max_members")
+  imageUrl    String?      @map("image_url") @db.VarChar(500)
+  isActive    Boolean      @default(true) @map("is_active")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  members     GroupMember[]
+
+  @@map("running_groups")
+}
+
+enum GroupPrivacy {
+  PUBLIC
+  PRIVATE
+  INVITE_ONLY
+}
+
+model GroupMember {
+  groupId    String       @map("group_id")
+  userId     String       @map("user_id") @db.VarChar(255)
+  role       MemberRole   @default(MEMBER)
+  joinedAt   DateTime     @default(now()) @map("joined_at")
+  isActive   Boolean      @default(true) @map("is_active")
+
+  group      RunningGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@id([groupId, userId])
+  @@map("group_members")
+}
+
+enum MemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+model Ranking {
+  id         String          @id @default(uuid())
+  userId     String          @map("user_id") @db.VarChar(255)
+  category   RankingCategory
+  score      Int             @default(0)
+  weekNumber Int             @map("week_number")
+  year       Int
+  rank       Int?
+  updatedAt  DateTime        @updatedAt @map("updated_at")
+
+  @@unique([userId, category, weekNumber, year])
+  @@index([category, weekNumber, year, score])
+  @@map("rankings")
+}
+
+enum RankingCategory {
+  WEEKLY_STEPS
+  WEEKLY_STAMINA
+  WEEKLY_SESSIONS
+  ALL_TIME_STEPS
+}
+
+model Reward {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(200)
+  description String?  @db.Text
+  staminaCost Int      @map("stamina_cost")
+  category    String   @db.VarChar(50)
+  imageUrl    String?  @map("image_url") @db.VarChar(500)
+  isActive    Boolean  @default(true) @map("is_active")
+  stock       Int?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  redemptions RewardRedemption[]
+
+  @@map("rewards")
+}
+
+model RewardRedemption {
+  id          String           @id @default(uuid())
+  userId      String           @map("user_id") @db.VarChar(255)
+  rewardId    String           @map("reward_id")
+  staminaCost Int              @map("stamina_cost")
+  status      RedemptionStatus @default(PENDING)
+  redeemedAt  DateTime         @default(now()) @map("redeemed_at")
+  fulfilledAt DateTime?        @map("fulfilled_at")
+  notes       String?          @db.Text
+
+  reward      Reward @relation(fields: [rewardId], references: [id])
+
+  @@map("reward_redemptions")
+}
+
+enum RedemptionStatus {
+  PENDING
+  PROCESSING
+  FULFILLED
+  CANCELLED
+  REFUNDED
+}
