@@ -17,7 +17,7 @@ export interface IStepsLogDocument extends Document {
 
 const stepsLogSchema = new Schema<IStepsLogDocument>(
   {
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     stepsCount: { type: Number, required: true, min: 0 },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
@@ -27,7 +27,6 @@ const stepsLogSchema = new Schema<IStepsLogDocument>(
       type: String,
       enum: ['valid', 'suspicious', 'blocked'],
       default: 'valid',
-      index: true,
     },
     gpsVarianceMeters: { type: Number, default: null },
     avgSpeedKmh: { type: Number, default: null },
