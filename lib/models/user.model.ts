@@ -34,7 +34,7 @@ const weeklyStepsSchema = new Schema(
 
 const userSchema = new Schema<IUserDocument>(
   {
-    googleId: { type: String, required: true, unique: true, index: true },
+    googleId: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     displayName: { type: String, required: true, trim: true },
     photoUrl: { type: String, default: null },
@@ -62,8 +62,6 @@ const userSchema = new Schema<IUserDocument>(
   { timestamps: true }
 )
 
-userSchema.index({ email: 1 })
-userSchema.index({ googleId: 1 })
 userSchema.index({ createdAt: -1 })
 userSchema.index({ accountStatus: 1 })
 userSchema.index({ lastActive: -1 })
