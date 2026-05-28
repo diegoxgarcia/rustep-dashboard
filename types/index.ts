@@ -85,9 +85,9 @@ export interface IStaminaLedger {
   userId: string
   amount: number
   type: TransactionType
-  referenceId?: string
-  description?: string
-  createdAt: string
+  referenceId?: string | null
+  description?: string | null
+  createdAt: string | Date
 }
 
 export interface IRanking {

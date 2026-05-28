@@ -5,7 +5,8 @@ import { StepsChart } from '@/components/dashboard/steps-chart'
 import { RecentUsersTable } from '@/components/dashboard/recent-users-table'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Users, Footprints, Zap, Activity, ShieldAlert } from 'lucide-react'
-import { OverviewMetrics } from '@/types'
+import { IUser, OverviewMetrics } from '@/types'
+import { serialize } from '@/lib/utils'
 import connectToMongoDB from '@/lib/mongodb'
 import prisma from '@/lib/prisma'
 import User from '@/lib/models/user.model'
@@ -71,7 +72,7 @@ async function getOverviewData(): Promise<OverviewMetrics | null> {
       totalStaminaCirculation: staminaCirculation._sum.amount ?? 0,
       pendingSuspiciousSessions: pendingSuspicious,
       stepsLast30Days,
-      recentUsers,
+      recentUsers: serialize<IUser[]>(recentUsers),
     }
   } catch {
     return null

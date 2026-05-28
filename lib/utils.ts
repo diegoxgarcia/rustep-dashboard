@@ -7,6 +7,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/**
+ * Serializa documentos de Mongoose a objetos planos:
+ * - ObjectId → string
+ * - Date → ISO string
+ * Necesario para pasar datos desde Server Components a Client Components.
+ */
+export function serialize<T>(doc: unknown): T {
+  return JSON.parse(JSON.stringify(doc)) as T
+}
+
 export function formatDate(date: string | Date): string {
   return format(new Date(date), 'dd MMM yyyy', { locale: es })
 }

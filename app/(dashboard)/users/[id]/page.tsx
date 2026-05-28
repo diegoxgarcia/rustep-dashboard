@@ -4,6 +4,8 @@ import { UserDetail } from '@/components/users/user-detail'
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import connectToMongoDB from '@/lib/mongodb'
+import { serialize } from '@/lib/utils'
+import { IUser, IStepsLog, IFraudFlag, IStaminaLedger } from '@/types'
 import prisma from '@/lib/prisma'
 import User from '@/lib/models/user.model'
 import StepsLog from '@/lib/models/steps-log.model'
@@ -48,10 +50,10 @@ async function getUserDetail(id: string) {
     })
 
     return {
-      user,
-      stepsLogs,
-      fraudFlag,
-      staminaTransactions,
+      user: serialize<IUser>(user),
+      stepsLogs: serialize<IStepsLog[]>(stepsLogs),
+      fraudFlag: fraudFlag ? serialize<IFraudFlag>(fraudFlag) : null,
+      staminaTransactions: serialize<IStaminaLedger[]>(staminaTransactions),
       stats: {
         totalSteps: stepsAgg[0]?.totalSteps ?? 0,
         totalSessions: stepsAgg[0]?.totalSessions ?? 0,
