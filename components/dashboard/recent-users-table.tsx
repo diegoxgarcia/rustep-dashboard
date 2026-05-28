@@ -11,49 +11,49 @@ export function RecentUsersTable({ users }: RecentUsersTableProps) {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-gray-200">
-            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+            <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">
               Usuario
             </th>
-            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">
               Actividad
             </th>
-            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">
               Estado
             </th>
-            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">
               Registro
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-[#1A3A5C]">
           {users.map((user) => (
-            <tr key={user._id} className="hover:bg-gray-50 transition-colors">
+            <tr key={user._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
               <td className="py-3 px-4">
-                <Link href={`/users/${user._id}`} className="flex items-center gap-3 hover:text-green-600">
+                <Link href={`/users/${user._id}`} className="flex items-center gap-3 hover:text-[#FF5A1F] transition-colors">
                   {user.photoUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={user.photoUrl} alt="" className="h-8 w-8 rounded-full" />
+                    <img src={user.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1A3A5C]" />
                   ) : (
-                    <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 text-xs font-medium">
+                    <div className="h-8 w-8 rounded-full bg-[#FF5A1F]/20 border border-[#FF5A1F]/40 flex items-center justify-center text-[#FF5A1F] text-xs font-bold font-bebas">
                       {user.displayName[0]}
                     </div>
                   )}
                   <div>
-                    <p className="font-medium text-gray-900">{user.displayName}</p>
-                    <p className="text-xs text-gray-500">{user.email}</p>
+                    <p className="font-medium text-white font-exo">{user.displayName}</p>
+                    <p className="text-xs text-[#8BA4BE] font-exo">{user.email}</p>
                   </div>
                 </Link>
               </td>
-              <td className="py-3 px-4 text-gray-600">
+              <td className="py-3 px-4 text-[#8BA4BE] font-exo text-xs">
                 {getActivityLabel(user.activityCategory)}
               </td>
               <td className="py-3 px-4">
-                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(user.accountStatus)}`}>
+                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-rajdhani font-semibold tracking-wide ${getStatusColor(user.accountStatus)}`}>
                   {user.accountStatus}
                 </span>
               </td>
-              <td className="py-3 px-4 text-gray-500 text-xs">
+              <td className="py-3 px-4 text-[#8BA4BE] font-exo text-xs">
                 {formatRelative(user.createdAt)}
               </td>
             </tr>

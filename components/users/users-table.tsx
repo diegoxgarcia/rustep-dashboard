@@ -109,56 +109,56 @@ export function UsersTable() {
       </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+        <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
       )}
 
       {loading ? (
-        <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
+        <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
       ) : (
         <>
-          <div className="overflow-x-auto rounded-lg border border-gray-200">
+          <div className="overflow-x-auto rounded-lg border border-[#1A3A5C]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Actividad</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Ultimo acceso</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Registro</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Actividad</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Estado</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Ultimo acceso</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Registro</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[#1A3A5C]">
                 {data?.data.map((user) => (
-                  <tr key={user._id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={user._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
                     <td className="py-3 px-4">
-                      <Link href={`/users/${user._id}`} className="flex items-center gap-3 hover:text-green-600">
+                      <Link href={`/users/${user._id}`} className="flex items-center gap-3 hover:text-[#FF5A1F] transition-colors">
                         {user.photoUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={user.photoUrl} alt="" className="h-9 w-9 rounded-full" />
+                          <img src={user.photoUrl} alt="" className="h-9 w-9 rounded-full border border-[#1A3A5C]" />
                         ) : (
-                          <div className="h-9 w-9 rounded-full bg-green-100 flex items-center justify-center text-green-700 text-sm font-medium">
+                          <div className="h-9 w-9 rounded-full bg-[#FF5A1F]/20 border border-[#FF5A1F]/40 flex items-center justify-center text-[#FF5A1F] text-sm font-bold font-bebas">
                             {user.displayName[0]}
                           </div>
                         )}
                         <div>
-                          <p className="font-medium text-gray-900">{user.displayName}</p>
-                          <p className="text-xs text-gray-500">{user.email}</p>
+                          <p className="font-medium text-white font-exo">{user.displayName}</p>
+                          <p className="text-xs text-[#8BA4BE] font-exo">{user.email}</p>
                         </div>
                       </Link>
                     </td>
-                    <td className="py-3 px-4 text-gray-600 text-xs">
+                    <td className="py-3 px-4 text-[#8BA4BE] font-exo text-xs">
                       {getActivityLabel(user.activityCategory)}
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(user.accountStatus)}`}>
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-rajdhani font-semibold tracking-wide ${getStatusColor(user.accountStatus)}`}>
                         {user.accountStatus}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-xs text-gray-500">
+                    <td className="py-3 px-4 text-xs text-[#8BA4BE] font-exo">
                       {formatRelative(user.lastActive)}
                     </td>
-                    <td className="py-3 px-4 text-xs text-gray-500">
+                    <td className="py-3 px-4 text-xs text-[#8BA4BE] font-exo">
                       {formatRelative(user.createdAt)}
                     </td>
                     <td className="py-3 px-4">
@@ -167,7 +167,7 @@ export function UsersTable() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="text-xs h-7 px-2 text-green-600 border-green-200 hover:bg-green-50"
+                            className="text-xs h-7 px-2 text-emerald-400 border-emerald-800/50 hover:bg-emerald-900/40"
                             disabled={actionLoading === user._id}
                             onClick={() => handleStatusChange(user._id, 'active')}
                           >
@@ -178,7 +178,7 @@ export function UsersTable() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="text-xs h-7 px-2 text-yellow-600 border-yellow-200 hover:bg-yellow-50"
+                            className="text-xs h-7 px-2 text-[#FF5A1F] border-[#FF5A1F]/30 hover:bg-[#FF5A1F]/20"
                             disabled={actionLoading === user._id}
                             onClick={() => handleStatusChange(user._id, 'suspended')}
                           >
@@ -189,7 +189,7 @@ export function UsersTable() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="text-xs h-7 px-2 text-red-600 border-red-200 hover:bg-red-50"
+                            className="text-xs h-7 px-2 text-red-400 border-red-800/50 hover:bg-red-900/40"
                             disabled={actionLoading === user._id}
                             onClick={() => handleStatusChange(user._id, 'banned')}
                           >
@@ -205,7 +205,7 @@ export function UsersTable() {
           </div>
 
           {data && (
-            <div className="flex items-center justify-between text-sm text-gray-500">
+            <div className="flex items-center justify-between text-sm text-[#8BA4BE] font-exo">
               <span>
                 {data.total} usuario{data.total !== 1 ? 's' : ''} encontrado{data.total !== 1 ? 's' : ''}
               </span>

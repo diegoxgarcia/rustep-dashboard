@@ -31,6 +31,18 @@ const categoryLabels: Record<string, string> = {
   ALL_TIME_STEPS: 'Pasos totales',
 }
 
+const medalColors = [
+  'text-yellow-400',
+  'text-[#8BA4BE]',
+  'text-amber-600',
+]
+
+const medalBg = [
+  'bg-yellow-400/10 border-yellow-400/30',
+  'bg-[#8BA4BE]/10 border-[#8BA4BE]/30',
+  'bg-amber-600/10 border-amber-600/30',
+]
+
 export default function RankingsPage() {
   const now = new Date()
   const [data, setData] = useState<RankingEntry[]>([])
@@ -59,13 +71,11 @@ export default function RankingsPage() {
 
   useEffect(() => { fetchRankings() }, [fetchRankings])
 
-  const medalColors = ['text-yellow-500', 'text-gray-400', 'text-amber-600']
-
   return (
     <div>
       <Header title="Rankings" description="Clasificaciones semanales y totales" />
       <div className="p-6 space-y-4">
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 items-center">
           <Select value={category} onValueChange={setCategory}>
             <SelectTrigger className="w-52">
               <SelectValue />
@@ -77,7 +87,7 @@ export default function RankingsPage() {
             </SelectContent>
           </Select>
           <div className="flex gap-2 items-center">
-            <label className="text-sm text-gray-600">Semana:</label>
+            <label className="text-sm text-[#8BA4BE] font-exo">Semana:</label>
             <Input
               type="number"
               min="1"
@@ -88,7 +98,7 @@ export default function RankingsPage() {
             />
           </div>
           <div className="flex gap-2 items-center">
-            <label className="text-sm text-gray-600">Ano:</label>
+            <label className="text-sm text-[#8BA4BE] font-exo">Ano:</label>
             <Input
               type="number"
               min="2024"
@@ -101,55 +111,67 @@ export default function RankingsPage() {
         </div>
 
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+          <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
         )}
         {loading ? (
-          <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
+          <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
         ) : data.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-48 text-gray-400">
-            <Trophy className="h-12 w-12 mb-3 opacity-30" />
-            <p>No hay datos de ranking para este periodo</p>
+          <div className="flex flex-col items-center justify-center h-48 text-[#8BA4BE]">
+            <Trophy className="h-12 w-12 mb-3 opacity-20" />
+            <p className="font-exo text-sm">No hay datos de ranking para este periodo</p>
           </div>
         ) : (
-          <div className="rounded-lg border border-gray-200 overflow-hidden">
+          <div className="rounded-lg border border-[#1A3A5C] overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider w-16">Pos.</th>
-                  <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                  <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Puntuacion</th>
+                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest w-16">Pos.</th>
+                  <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
+                  <th className="text-right py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Puntuacion</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-[#1A3A5C]">
                 {data.map((entry, idx) => (
-                  <tr key={entry.id} className={`hover:bg-gray-50 ${idx < 3 ? 'bg-amber-50/30' : ''}`}>
+                  <tr key={entry.id} className={`transition-colors ${idx < 3 ? 'bg-[#0D2540]/50 hover:bg-[#0D2540]' : 'bg-[#071A2F] hover:bg-[#0D2540]'}`}>
                     <td className="py-3 px-4">
-                      <span className={`font-bold text-lg ${idx < 3 ? medalColors[idx] : 'text-gray-400'}`}>
-                        #{entry.rank || idx + 1}
-                      </span>
+                      {idx < 3 ? (
+                        <div className={`inline-flex items-center justify-center h-8 w-8 rounded-full border ${medalBg[idx]}`}>
+                          <span className={`font-bebas text-base ${medalColors[idx]}`}>
+                            {entry.rank || idx + 1}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="font-bebas text-lg text-[#8BA4BE]">#{entry.rank || idx + 1}</span>
+                      )}
                     </td>
                     <td className="py-3 px-4">
                       {entry.user ? (
                         <div className="flex items-center gap-3">
                           {entry.user.photoUrl ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={entry.user.photoUrl} alt="" className="h-8 w-8 rounded-full" />
+                            <img src={entry.user.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1A3A5C]" />
                           ) : (
-                            <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 text-xs font-medium">
+                            <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold font-bebas ${
+                              idx < 3
+                                ? `border ${medalBg[idx]} ${medalColors[idx]}`
+                                : 'bg-[#FF5A1F]/20 border border-[#FF5A1F]/40 text-[#FF5A1F]'
+                            }`}>
                               {entry.user.displayName[0]}
                             </div>
                           )}
                           <div>
-                            <p className="font-medium text-gray-900">{entry.user.displayName}</p>
-                            <p className="text-xs text-gray-500">{entry.user.email}</p>
+                            <p className="font-medium text-white font-exo">{entry.user.displayName}</p>
+                            <p className="text-xs text-[#8BA4BE] font-exo">{entry.user.email}</p>
                           </div>
                         </div>
                       ) : (
-                        <span className="text-gray-400 text-xs font-mono">{entry.userId}</span>
+                        <span className="text-[#8BA4BE] text-xs font-mono">{entry.userId}</span>
                       )}
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className="font-bold text-gray-900">{formatNumber(entry.score)}</span>
+                      <span className={`font-bebas text-xl tracking-wider ${idx < 3 ? medalColors[idx] : 'text-white'}`}>
+                        {formatNumber(entry.score)}
+                      </span>
                     </td>
                   </tr>
                 ))}

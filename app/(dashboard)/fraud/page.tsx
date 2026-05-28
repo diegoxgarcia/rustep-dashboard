@@ -66,17 +66,17 @@ export default function FraudPage() {
         </div>
 
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+          <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
         )}
         {loading ? (
-          <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
+          <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
         ) : (
           <>
-            <div className="rounded-lg border border-gray-200 overflow-hidden">
+            <div className="rounded-lg border border-[#1A3A5C] overflow-hidden">
               <FraudTable flags={data?.data || []} onRefresh={fetchFraud} />
             </div>
             {data && (
-              <div className="flex items-center justify-between text-sm text-gray-500">
+              <div className="flex items-center justify-between text-sm text-[#8BA4BE] font-exo">
                 <span>{data.total} casos encontrados</span>
                 <div className="flex items-center gap-2">
                   <Button variant="outline" size="sm" onClick={() => setPage(page - 1)} disabled={page <= 1}>

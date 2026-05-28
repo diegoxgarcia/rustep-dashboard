@@ -92,17 +92,17 @@ export default async function OverviewPage() {
       />
       <div className="p-6 space-y-6">
         {!data ? (
-          <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 space-y-2">
-            <p className="font-medium">Sin conexión a la base de datos</p>
-            <p className="text-sm">
-              No se pudo conectar a MongoDB o PostgreSQL. Verificá que estas variables estén cargadas en Vercel → Settings → Environment Variables:
+          <div className="p-6 bg-[#0D2540] border border-[#FF5A1F]/40 rounded-lg space-y-2">
+            <p className="font-rajdhani font-semibold text-[#FF5A1F] tracking-wide">Sin conexion a la base de datos</p>
+            <p className="text-sm text-[#8BA4BE] font-exo">
+              No se pudo conectar a MongoDB o PostgreSQL. Verifica que estas variables esten cargadas en Vercel &rarr; Settings &rarr; Environment Variables:
             </p>
-            <ul className="text-sm list-disc list-inside space-y-1 font-mono">
+            <ul className="text-sm list-disc list-inside space-y-1 font-mono text-[#00C2FF]">
               <li>MONGODB_URI</li>
               <li>DATABASE_URL</li>
             </ul>
-            <p className="text-xs mt-2">
-              Revisá los logs en Vercel → pestaña &quot;Logs&quot; para ver el error exacto.
+            <p className="text-xs mt-2 text-[#8BA4BE] font-exo">
+              Revisa los logs en Vercel &rarr; pestana &quot;Logs&quot; para ver el error exacto.
             </p>
           </div>
         ) : (
@@ -112,38 +112,38 @@ export default async function OverviewPage() {
                 title="Total usuarios"
                 value={data.totalUsers}
                 icon={Users}
-                color="text-blue-600"
+                color="text-[#00C2FF]"
               />
               <StatsCard
                 title="Activos (7 dias)"
                 value={data.activeUsersLast7Days}
                 icon={Activity}
-                color="text-green-600"
+                color="text-[#FF5A1F]"
               />
               <StatsCard
                 title="Pasos hoy"
                 value={data.totalStepsToday}
                 icon={Footprints}
-                color="text-purple-600"
+                color="text-[#FF5A1F]"
               />
               <StatsCard
                 title="Stamina en circulacion"
                 value={data.totalStaminaCirculation}
                 icon={Zap}
-                color="text-yellow-500"
+                color="text-[#00C2FF]"
               />
               <StatsCard
                 title="Sesiones sospechosas"
                 value={data.pendingSuspiciousSessions}
                 icon={ShieldAlert}
-                color="text-red-600"
+                color="text-[#FF5A1F]"
                 description="Pendientes de revision"
               />
             </div>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Pasos totales - ultimos 30 dias</CardTitle>
+                <CardTitle>Pasos totales - ultimos 30 dias</CardTitle>
               </CardHeader>
               <CardContent>
                 <StepsChart data={data.stepsLast30Days} />
@@ -152,9 +152,9 @@ export default async function OverviewPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Ultimos usuarios registrados</CardTitle>
+                <CardTitle>Ultimos usuarios registrados</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-0 pb-0">
                 <RecentUsersTable users={data.recentUsers} />
               </CardContent>
             </Card>

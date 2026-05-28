@@ -59,58 +59,58 @@ export default function StepsPage() {
         </div>
 
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+          <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
         )}
         {loading ? (
-          <div className="flex items-center justify-center h-48 text-gray-400">Cargando...</div>
+          <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
         ) : (
           <>
-            <div className="overflow-x-auto rounded-lg border border-gray-200">
+            <div className="overflow-x-auto rounded-lg border border-[#1A3A5C]">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50">
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Pasos</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Duracion</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Velocidad</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Confianza</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                    <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                  <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Pasos</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Duracion</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Velocidad</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Confianza</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Estado</th>
+                    <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-[#1A3A5C]">
                   {data?.data.map((log) => (
-                    <tr key={log._id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={log._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
                       <td className="py-3 px-4">
                         {log.userId ? (
                           <div>
-                            <p className="font-medium text-gray-900">{(log.userId as IUser).displayName}</p>
-                            <p className="text-xs text-gray-500">{(log.userId as IUser).email}</p>
+                            <p className="font-medium text-white font-exo">{(log.userId as IUser).displayName}</p>
+                            <p className="text-xs text-[#8BA4BE] font-exo">{(log.userId as IUser).email}</p>
                           </div>
                         ) : (
-                          <span className="text-gray-400 text-xs">Usuario eliminado</span>
+                          <span className="text-[#8BA4BE] text-xs font-exo">Usuario eliminado</span>
                         )}
                       </td>
-                      <td className="py-3 px-4 font-medium">{formatNumber(log.stepsCount)}</td>
-                      <td className="py-3 px-4">{log.sessionDurationMinutes} min</td>
-                      <td className="py-3 px-4">{log.avgSpeedKmh?.toFixed(1) || '-'} km/h</td>
+                      <td className="py-3 px-4 font-medium text-white font-exo">{formatNumber(log.stepsCount)}</td>
+                      <td className="py-3 px-4 text-[#8BA4BE] font-exo">{log.sessionDurationMinutes} min</td>
+                      <td className="py-3 px-4 text-[#8BA4BE] font-exo">{log.avgSpeedKmh?.toFixed(1) || '-'} km/h</td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-12 bg-gray-200 rounded-full h-1.5">
+                          <div className="w-12 bg-[#1A3A5C] rounded-full h-1.5">
                             <div
-                              className={`h-1.5 rounded-full ${log.confidenceScore >= 0.7 ? 'bg-green-500' : log.confidenceScore >= 0.4 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                              className={`h-1.5 rounded-full ${log.confidenceScore >= 0.7 ? 'bg-emerald-400' : log.confidenceScore >= 0.4 ? 'bg-[#FF5A1F]' : 'bg-red-500'}`}
                               style={{ width: `${log.confidenceScore * 100}%` }}
                             />
                           </div>
-                          <span className="text-xs">{(log.confidenceScore * 100).toFixed(0)}%</span>
+                          <span className="text-xs text-[#8BA4BE] font-exo">{(log.confidenceScore * 100).toFixed(0)}%</span>
                         </div>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${getStatusColor(log.confidenceStatus)}`}>
+                        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-rajdhani font-semibold tracking-wide ${getStatusColor(log.confidenceStatus)}`}>
                           {log.confidenceStatus}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-xs text-gray-500">{formatDateTime(log.startTime)}</td>
+                      <td className="py-3 px-4 text-xs text-[#8BA4BE] font-exo">{formatDateTime(log.startTime)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -118,7 +118,7 @@ export default function StepsPage() {
             </div>
 
             {data && (
-              <div className="flex items-center justify-between text-sm text-gray-500">
+              <div className="flex items-center justify-between text-sm text-[#8BA4BE] font-exo">
                 <span>{data.total} sesiones encontradas</span>
                 <div className="flex items-center gap-2">
                   <Button variant="outline" size="sm" onClick={() => setPage(page - 1)} disabled={page <= 1}>

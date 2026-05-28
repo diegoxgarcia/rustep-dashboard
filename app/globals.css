@@ -3,17 +3,90 @@
 @tailwind utilities;
 
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --background: #071A2F;
+  --foreground: #ffffff;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: 'Exo 2', sans-serif;
 }
 
+/* Scrollbar oscuro estilizado */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #071A2F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A3A5C;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5A1F;
+}
+
+/* Clases utilitarias de marca */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-exo {
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .bg-brand-navy {
+    background-color: #071A2F;
+  }
+
+  .bg-brand-surface {
+    background-color: #0D2540;
+  }
+
+  .border-brand {
+    border-color: #1A3A5C;
+  }
+
+  .text-brand-orange {
+    color: #FF5A1F;
+  }
+
+  .text-brand-cyan {
+    color: #00C2FF;
+  }
+
+  .text-brand-secondary {
+    color: #8BA4BE;
+  }
+
+  .shadow-orange {
+    box-shadow: 0 4px 20px rgba(255, 90, 31, 0.15);
+  }
+
+  .shadow-cyan {
+    box-shadow: 0 4px 20px rgba(0, 194, 255, 0.15);
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 10px rgba(255, 90, 31, 0.4);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 10px rgba(0, 194, 255, 0.4);
   }
 }

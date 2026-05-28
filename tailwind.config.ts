@@ -9,9 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#22c55e',
+        primary: '#FF5A1F',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        brand: {
+          orange: '#FF5A1F',
+          'orange-dark': '#E54E16',
+          navy: '#071A2F',
+          surface: '#0D2540',
+          border: '#1A3A5C',
+          cyan: '#00C2FF',
+          'text-secondary': '#8BA4BE',
+        },
+      },
+      fontFamily: {
+        bebas: ['Bebas Neue', 'sans-serif'],
+        exo: ['Exo 2', 'sans-serif'],
+        rajdhani: ['Rajdhani', 'sans-serif'],
       },
     },
   },

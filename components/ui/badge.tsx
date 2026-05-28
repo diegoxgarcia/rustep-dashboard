@@ -3,18 +3,18 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const badgeVariants = cva(
-  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors',
+  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold font-rajdhani tracking-wide transition-colors',
   {
     variants: {
       variant: {
-        default: 'border-transparent bg-primary text-primary-foreground',
-        secondary: 'border-transparent bg-secondary text-secondary-foreground',
-        destructive: 'border-transparent bg-destructive text-destructive-foreground',
-        outline: 'text-foreground',
-        success: 'border-transparent bg-green-100 text-green-800',
-        warning: 'border-transparent bg-yellow-100 text-yellow-800',
-        danger: 'border-transparent bg-red-100 text-red-800',
-        info: 'border-transparent bg-blue-100 text-blue-800',
+        default: 'border-transparent bg-[#FF5A1F] text-white',
+        secondary: 'border-transparent bg-[#0D2540] text-[#8BA4BE] border-[#1A3A5C]',
+        destructive: 'border-transparent bg-red-900/40 text-red-400 border-red-800/50',
+        outline: 'text-white border-[#1A3A5C]',
+        success: 'border-transparent bg-emerald-900/40 text-emerald-400 border-emerald-800/50',
+        warning: 'border-transparent bg-[#FF5A1F]/20 text-[#FF5A1F] border-[#FF5A1F]/30',
+        danger: 'border-transparent bg-red-900/40 text-red-400 border-red-800/50',
+        info: 'border-transparent bg-[#00C2FF]/15 text-[#00C2FF] border-[#00C2FF]/30',
       },
     },
     defaultVariants: {

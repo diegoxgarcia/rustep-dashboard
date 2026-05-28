@@ -14,17 +14,24 @@ export function Header({ title, description }: HeaderProps) {
   const { data: session } = useSession()
 
   return (
-    <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6">
+    <header className="h-16 border-b border-[#1A3A5C] bg-[#0D2540] flex items-center justify-between px-6">
       <div>
-        <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-        {description && <p className="text-sm text-gray-500">{description}</p>}
+        <h2 className="text-xl font-bebas tracking-wider text-white leading-none">{title}</h2>
+        {description && (
+          <p className="text-xs text-[#8BA4BE] font-exo mt-0.5">{description}</p>
+        )}
       </div>
       <div className="flex items-center gap-4">
         {session?.user && (
-          <span className="text-sm text-gray-600">{session.user.email}</span>
+          <span className="text-sm text-[#8BA4BE] font-exo hidden sm:block">{session.user.email}</span>
         )}
         <form action={signOutAction}>
-          <Button variant="ghost" size="sm" type="submit">
+          <Button
+            variant="outline"
+            size="sm"
+            type="submit"
+            className="border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white font-exo font-medium transition-all duration-200"
+          >
             <LogOut className="h-4 w-4 mr-2" />
             Salir
           </Button>

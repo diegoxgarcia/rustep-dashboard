@@ -54,18 +54,18 @@ export function getActivityLabel(category: string): string {
 
 export function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    active: 'bg-green-100 text-green-800',
-    suspended: 'bg-yellow-100 text-yellow-800',
-    banned: 'bg-red-100 text-red-800',
-    valid: 'bg-green-100 text-green-800',
-    suspicious: 'bg-yellow-100 text-yellow-800',
-    blocked: 'bg-red-100 text-red-800',
-    pending: 'bg-gray-100 text-gray-800',
-    under_review: 'bg-blue-100 text-blue-800',
-    cleared: 'bg-green-100 text-green-800',
-    confirmed_fraud: 'bg-red-100 text-red-800',
+    active: 'bg-emerald-900/40 text-emerald-400 border border-emerald-800/50',
+    suspended: 'bg-[#FF5A1F]/20 text-[#FF5A1F] border border-[#FF5A1F]/30',
+    banned: 'bg-red-900/40 text-red-400 border border-red-800/50',
+    valid: 'bg-emerald-900/40 text-emerald-400 border border-emerald-800/50',
+    suspicious: 'bg-[#FF5A1F]/20 text-[#FF5A1F] border border-[#FF5A1F]/30',
+    blocked: 'bg-red-900/40 text-red-400 border border-red-800/50',
+    pending: 'bg-[#1A3A5C]/60 text-[#8BA4BE] border border-[#1A3A5C]',
+    under_review: 'bg-[#00C2FF]/15 text-[#00C2FF] border border-[#00C2FF]/30',
+    cleared: 'bg-emerald-900/40 text-emerald-400 border border-emerald-800/50',
+    confirmed_fraud: 'bg-red-900/40 text-red-400 border border-red-800/50',
   }
-  return colors[status] || 'bg-gray-100 text-gray-800'
+  return colors[status] || 'bg-[#1A3A5C]/60 text-[#8BA4BE] border border-[#1A3A5C]'
 }
 
 export function getRiskLevel(flag: {
@@ -75,10 +75,10 @@ export function getRiskLevel(flag: {
 }): { level: 'high' | 'medium' | 'low'; label: string; color: string } {
   const ratio = flag.totalSessions > 0 ? flag.suspiciousSessions / flag.totalSessions : 0
   if (ratio > 0.5 || flag.avgConfidenceScore < 0.4) {
-    return { level: 'high', label: 'Alto', color: 'bg-red-100 text-red-800' }
+    return { level: 'high', label: 'Alto', color: 'bg-red-900/40 text-red-400 border border-red-800/50' }
   }
   if (ratio > 0.2 || flag.avgConfidenceScore < 0.7) {
-    return { level: 'medium', label: 'Medio', color: 'bg-yellow-100 text-yellow-800' }
+    return { level: 'medium', label: 'Medio', color: 'bg-[#FF5A1F]/20 text-[#FF5A1F] border border-[#FF5A1F]/30' }
   }
-  return { level: 'low', label: 'Bajo', color: 'bg-blue-100 text-blue-800' }
+  return { level: 'low', label: 'Bajo', color: 'bg-[#00C2FF]/15 text-[#00C2FF] border border-[#00C2FF]/30' }
 }

@@ -61,18 +61,18 @@ export default function StaminaPage() {
       <Header title="Stamina" description="Ledger de todas las transacciones de stamina" />
       <div className="p-6 space-y-6">
         {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
-      )}
-      {data?.byType && (
+          <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
+        )}
+        {data?.byType && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {data.byType.map((entry) => (
               <Card key={entry.type}>
                 <CardContent className="p-4">
-                  <p className="text-xs text-gray-500 mb-1">{typeLabels[entry.type] || entry.type}</p>
-                  <p className={`text-xl font-bold ${(entry._sum.amount || 0) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <p className="text-xs text-[#8BA4BE] font-rajdhani uppercase tracking-widest mb-1">{typeLabels[entry.type] || entry.type}</p>
+                  <p className={`text-xl font-bebas tracking-wider ${(entry._sum.amount || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {(entry._sum.amount || 0) >= 0 ? '+' : ''}{formatNumber(entry._sum.amount || 0)}
                   </p>
-                  <p className="text-xs text-gray-400">{entry._count} transacciones</p>
+                  <p className="text-xs text-[#8BA4BE] font-exo">{entry._count} transacciones</p>
                 </CardContent>
               </Card>
             ))}
@@ -82,7 +82,7 @@ export default function StaminaPage() {
         {data?.weeklyData && data.weeklyData.length > 0 && (
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Stamina emitida vs gastada por semana</CardTitle>
+              <CardTitle>Stamina emitida vs gastada por semana</CardTitle>
             </CardHeader>
             <CardContent>
               <StaminaChart data={data.weeklyData.map(d => ({
@@ -97,7 +97,7 @@ export default function StaminaPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base">Transacciones</CardTitle>
+              <CardTitle>Transacciones</CardTitle>
               <Select
                 value={type || 'all'}
                 onValueChange={(v) => { setType(v === 'all' ? '' : v); setPage(1) }}
@@ -114,45 +114,45 @@ export default function StaminaPage() {
               </Select>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0 pb-0">
             {loading ? (
-              <div className="flex items-center justify-center h-32 text-gray-400">Cargando...</div>
+              <div className="flex items-center justify-center h-32 text-[#8BA4BE] font-exo px-6">Cargando...</div>
             ) : (
               <>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                        <th className="text-left py-3 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                        <th className="text-left py-3 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario ID</th>
-                        <th className="text-left py-3 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Descripcion</th>
-                        <th className="text-left py-3 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                      <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                        <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Tipo</th>
+                        <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Cantidad</th>
+                        <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario ID</th>
+                        <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Descripcion</th>
+                        <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-[#1A3A5C]">
                       {data?.data.map((entry) => (
-                        <tr key={entry.id} className="hover:bg-gray-50">
-                          <td className="py-2 px-3">
-                            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded font-mono">
+                        <tr key={entry.id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                          <td className="py-2 px-4">
+                            <span className="text-xs bg-[#0D2540] border border-[#1A3A5C] text-[#00C2FF] px-2 py-0.5 rounded font-mono font-rajdhani">
                               {entry.type}
                             </span>
                           </td>
-                          <td className={`py-2 px-3 font-medium ${entry.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          <td className={`py-2 px-4 font-medium font-exo ${entry.amount >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                             {entry.amount >= 0 ? '+' : ''}{formatNumber(entry.amount)}
                           </td>
-                          <td className="py-2 px-3 text-xs text-gray-500 font-mono truncate max-w-[120px]">
+                          <td className="py-2 px-4 text-xs text-[#8BA4BE] font-mono truncate max-w-[120px]">
                             {entry.userId}
                           </td>
-                          <td className="py-2 px-3 text-xs text-gray-500">{entry.description || '-'}</td>
-                          <td className="py-2 px-3 text-xs text-gray-500">{formatDateTime(entry.createdAt)}</td>
+                          <td className="py-2 px-4 text-xs text-[#8BA4BE] font-exo">{entry.description || '-'}</td>
+                          <td className="py-2 px-4 text-xs text-[#8BA4BE] font-exo">{formatDateTime(entry.createdAt)}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
                 {data && (
-                  <div className="flex items-center justify-between text-sm text-gray-500 mt-4">
+                  <div className="flex items-center justify-between text-sm text-[#8BA4BE] font-exo mt-4 px-4 pb-4">
                     <span>{data.total} transacciones</span>
                     <div className="flex items-center gap-2">
                       <Button variant="outline" size="sm" onClick={() => setPage(page - 1)} disabled={page <= 1}>

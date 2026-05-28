@@ -15,20 +15,20 @@ export default function DashboardError({
 
   return (
     <div className="p-8 max-w-2xl">
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 space-y-4">
-        <h2 className="text-lg font-semibold text-red-800">Error en el dashboard</h2>
-        <div className="bg-red-100 rounded p-3 font-mono text-xs text-red-900 overflow-auto max-h-60 whitespace-pre-wrap">
+      <div className="bg-[#0D2540] border border-[#FF5A1F]/40 rounded-lg p-6 space-y-4">
+        <h2 className="text-lg font-rajdhani font-semibold text-[#FF5A1F] tracking-wide">Error en el dashboard</h2>
+        <div className="bg-[#071A2F] border border-[#1A3A5C] rounded p-3 font-mono text-xs text-[#8BA4BE] overflow-auto max-h-60 whitespace-pre-wrap">
           {error.message || 'Error desconocido'}
         </div>
         {error.stack && (
-          <details className="text-xs text-red-700">
-            <summary className="cursor-pointer font-medium">Stack trace</summary>
-            <pre className="mt-2 overflow-auto max-h-40 whitespace-pre-wrap">{error.stack}</pre>
+          <details className="text-xs text-[#8BA4BE] font-exo">
+            <summary className="cursor-pointer font-medium text-[#FF5A1F] hover:text-[#E54E16] transition-colors">Stack trace</summary>
+            <pre className="mt-2 overflow-auto max-h-40 whitespace-pre-wrap text-[#8BA4BE]">{error.stack}</pre>
           </details>
         )}
         <button
           onClick={reset}
-          className="px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700"
+          className="px-4 py-2 bg-[#FF5A1F] text-white rounded-md text-sm hover:bg-[#E54E16] font-exo font-medium transition-colors"
         >
           Reintentar
         </button>

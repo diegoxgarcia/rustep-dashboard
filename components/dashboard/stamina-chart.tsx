@@ -19,15 +19,15 @@ export function StaminaChart({ data }: StaminaChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1A3A5C" />
         <XAxis
           dataKey="week"
-          tick={{ fontSize: 11, fill: '#6b7280' }}
+          tick={{ fontSize: 11, fill: '#8BA4BE', fontFamily: 'Exo 2' }}
           tickLine={false}
           axisLine={false}
         />
         <YAxis
-          tick={{ fontSize: 11, fill: '#6b7280' }}
+          tick={{ fontSize: 11, fill: '#8BA4BE', fontFamily: 'Exo 2' }}
           tickLine={false}
           axisLine={false}
           tickFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}
@@ -37,11 +37,23 @@ export function StaminaChart({ data }: StaminaChartProps) {
             (Number(value) || 0).toLocaleString('es-AR'),
             name === 'credited' ? 'Emitida' : 'Gastada',
           ]}
-          contentStyle={{ border: '1px solid #e5e7eb', borderRadius: '8px', fontSize: '12px' }}
+          contentStyle={{
+            background: '#0D2540',
+            border: '1px solid #1A3A5C',
+            borderRadius: '8px',
+            fontSize: '12px',
+            color: '#ffffff',
+          }}
+          labelStyle={{ color: '#ffffff', fontFamily: 'Exo 2' }}
         />
-        <Legend formatter={(value) => value === 'credited' ? 'Stamina emitida' : 'Stamina gastada'} />
-        <Bar dataKey="credited" fill="#22c55e" radius={[4, 4, 0, 0]} />
-        <Bar dataKey="debited" fill="#f87171" radius={[4, 4, 0, 0]} />
+        <Legend
+          formatter={(value) => (
+            value === 'credited' ? 'Stamina emitida' : 'Stamina gastada'
+          )}
+          wrapperStyle={{ color: '#8BA4BE', fontFamily: 'Exo 2', fontSize: '12px' }}
+        />
+        <Bar dataKey="credited" fill="#FF5A1F" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="debited" fill="#00C2FF" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )
