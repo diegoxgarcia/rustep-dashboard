@@ -1,5 +1,9 @@
-import { auth } from '@/lib/auth'
-import { NavItem } from './nav-item'
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { cn } from '@/lib/utils'
 import {
   LayoutDashboard,
   Users,
@@ -9,10 +13,43 @@ import {
   Trophy,
   Database,
   Activity,
+  LucideIcon,
 } from 'lucide-react'
 
-export async function Sidebar() {
-  const session = await auth()
+interface NavLinkProps {
+  href: string
+  icon: LucideIcon
+  label: string
+  adminOnly?: boolean
+}
+
+function NavLink({ href, icon: Icon, label, adminOnly }: NavLinkProps) {
+  const pathname = usePathname()
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
+
+  return (
+    <Link
+      href={href}
+      className={cn(
+        'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+        isActive
+          ? 'bg-green-600 text-white'
+          : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+      )}
+    >
+      <Icon className="h-5 w-5 shrink-0" />
+      <span>{label}</span>
+      {adminOnly && (
+        <span className="ml-auto text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">
+          Admin
+        </span>
+      )}
+    </Link>
+  )
+}
+
+export function Sidebar() {
+  const { data: session } = useSession()
   const isAdmin = session?.user?.isAdmin
 
   return (
@@ -28,12 +65,12 @@ export async function Sidebar() {
       </div>
 
       <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-        <NavItem href="/" icon={LayoutDashboard} label="Overview" />
-        <NavItem href="/users" icon={Users} label="Usuarios" />
-        <NavItem href="/steps" icon={Footprints} label="Sesiones de pasos" />
-        <NavItem href="/stamina" icon={Zap} label="Stamina" />
-        <NavItem href="/fraud" icon={ShieldAlert} label="Fraude" />
-        <NavItem href="/rankings" icon={Trophy} label="Rankings" />
+        <NavLink href="/" icon={LayoutDashboard} label="Overview" />
+        <NavLink href="/users" icon={Users} label="Usuarios" />
+        <NavLink href="/steps" icon={Footprints} label="Sesiones de pasos" />
+        <NavLink href="/stamina" icon={Zap} label="Stamina" />
+        <NavLink href="/fraud" icon={ShieldAlert} label="Fraude" />
+        <NavLink href="/rankings" icon={Trophy} label="Rankings" />
         {isAdmin && (
           <>
             <div className="pt-4 pb-2">
@@ -41,7 +78,7 @@ export async function Sidebar() {
                 Admin
               </p>
             </div>
-            <NavItem href="/seed" icon={Database} label="Datos de prueba" adminOnly />
+            <NavLink href="/seed" icon={Database} label="Datos de prueba" adminOnly />
           </>
         )}
       </nav>
