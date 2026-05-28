@@ -34,8 +34,8 @@ export async function GET(request: NextRequest) {
       prisma.$queryRaw<{ week: string; credited: number; debited: number }[]>`
         SELECT
           TO_CHAR(DATE_TRUNC('week', created_at), 'YYYY-WW') AS week,
-          COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS credited,
-          COALESCE(ABS(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END)), 0) AS debited
+          COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0)::int AS credited,
+          COALESCE(ABS(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END)), 0)::int AS debited
         FROM stamina_ledger
         WHERE created_at >= NOW() - INTERVAL '8 weeks'
         GROUP BY DATE_TRUNC('week', created_at)
