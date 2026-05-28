@@ -74,7 +74,8 @@ async function getOverviewData(): Promise<OverviewMetrics | null> {
       stepsLast30Days,
       recentUsers: serialize<IUser[]>(recentUsers),
     }
-  } catch {
+  } catch (err) {
+    console.error('[Overview] Error conectando a la base de datos:', err)
     return null
   }
 }
@@ -91,10 +92,17 @@ export default async function OverviewPage() {
       />
       <div className="p-6 space-y-6">
         {!data ? (
-          <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800">
-            <p className="font-medium">Configurar variables de entorno</p>
-            <p className="text-sm mt-1">
-              Conecta MONGODB_URI y DATABASE_URL en tu .env.local para ver los datos reales.
+          <div className="p-6 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 space-y-2">
+            <p className="font-medium">Sin conexión a la base de datos</p>
+            <p className="text-sm">
+              No se pudo conectar a MongoDB o PostgreSQL. Verificá que estas variables estén cargadas en Vercel → Settings → Environment Variables:
+            </p>
+            <ul className="text-sm list-disc list-inside space-y-1 font-mono">
+              <li>MONGODB_URI</li>
+              <li>DATABASE_URL</li>
+            </ul>
+            <p className="text-xs mt-2">
+              Revisá los logs en Vercel → pestaña &quot;Logs&quot; para ver el error exacto.
             </p>
           </div>
         ) : (
