@@ -9,30 +9,12 @@ export default async function LoginPage() {
   return (
     <div className="min-h-screen bg-[#0A0A12] flex relative overflow-hidden">
 
-      {/* LEFT PANEL — branding con asset */}
+      {/* LEFT PANEL — branding */}
       <div className="hidden lg:flex flex-1 relative items-center justify-center p-12 overflow-hidden">
-        {/* Asset de fondo — logo-wide con efecto atmosférico */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/assets/logo-wide.svg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ opacity: 0.22 }}
-        />
-        {/* Gradient overlay — transparente en el centro, oscuro en los bordes */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse at center, #0A0A1233 0%, #0A0A1299 60%, #0A0A12 100%)',
-          }}
-        />
+        {/* Glow ambiental sutil */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, #FF5A1F0A 0%, transparent 70%)' }} />
         {/* Right vignette para fundir con el panel de login */}
-        <div
-          className="absolute inset-y-0 right-0 w-32"
-          style={{ background: 'linear-gradient(to right, transparent, #0A0A12)' }}
-        />
+        <div className="absolute inset-y-0 right-0 w-32 pointer-events-none" style={{ background: 'linear-gradient(to right, transparent, #0A0A12)' }} />
         {/* Logo grande centrado */}
         <div className="relative z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
