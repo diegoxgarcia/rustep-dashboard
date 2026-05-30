@@ -1,9 +1,8 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { LogOut } from 'lucide-react'
-import { signOutAction } from '@/lib/actions'
 
 interface HeaderProps {
   title: string
@@ -12,13 +11,27 @@ interface HeaderProps {
   bannerPosition?: string   // object-position, e.g. "right center"
 }
 
+function SignOutButton() {
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={() => signOut({ callbackUrl: '/login' })}
+      className="border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white font-exo font-medium transition-all duration-200"
+    >
+      <LogOut className="h-4 w-4 mr-2" />
+      Salir
+    </Button>
+  )
+}
+
 export function Header({ title, description, bannerSrc, bannerPosition = 'right center' }: HeaderProps) {
   const { data: session } = useSession()
 
   if (bannerSrc) {
     return (
       <header className="relative overflow-hidden border-b border-[#1A3A5C]" style={{ minHeight: '160px' }}>
-        {/* Asset image — right side, fades into dark */}
+        {/* Asset image — decorative background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={bannerSrc}
@@ -27,29 +40,19 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
           style={{ objectPosition: bannerPosition, opacity: 0.18 }}
         />
-        {/* Gradient: solid dark on left, transparent on right so the image shows */}
+        {/* Gradient overlay */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background: 'linear-gradient(to right, #071A2F 45%, #071A2F99 75%, transparent 100%)',
           }}
         />
         {/* Top-right action bar */}
-        <div className="absolute top-0 right-0 flex items-center gap-4 px-6 py-3">
+        <div className="absolute top-0 right-0 z-20 flex items-center gap-4 px-6 py-3">
           {session?.user && (
             <span className="text-xs text-[#8BA4BE] font-exo hidden sm:block">{session.user.email}</span>
           )}
-          <form action={signOutAction}>
-            <Button
-              variant="outline"
-              size="sm"
-              type="submit"
-              className="border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white font-exo font-medium transition-all duration-200"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Salir
-            </Button>
-          </form>
+          <SignOutButton />
         </div>
         {/* Title content */}
         <div className="relative z-10 px-8 pt-10 pb-6">
@@ -62,7 +65,7 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
     )
   }
 
-  // Fallback: slim bar without banner (used for simple pages)
+  // Fallback: slim bar without banner
   return (
     <header className="h-16 border-b border-[#1A3A5C] bg-[#0D2540] flex items-center justify-between px-6">
       <div>
@@ -75,17 +78,7 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
         {session?.user && (
           <span className="text-sm text-[#8BA4BE] font-exo hidden sm:block">{session.user.email}</span>
         )}
-        <form action={signOutAction}>
-          <Button
-            variant="outline"
-            size="sm"
-            type="submit"
-            className="border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white font-exo font-medium transition-all duration-200"
-          >
-            <LogOut className="h-4 w-4 mr-2" />
-            Salir
-          </Button>
-        </form>
+        <SignOutButton />
       </div>
     </header>
   )
