@@ -11,9 +11,9 @@ export default async function DashboardLayout({
   if (!session) redirect('/login')
 
   return (
-    <div className="flex min-h-screen bg-[#071A2F]">
+    <div className="flex min-h-screen bg-[#0A0A12]">
       <Sidebar />
-      <main className="ml-64 flex-1 min-h-screen bg-[#071A2F]">
+      <main className="ml-64 flex-1 min-h-screen bg-[#0A0A12]">
         {children}
       </main>
     </div>

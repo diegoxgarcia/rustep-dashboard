@@ -61,7 +61,7 @@ export function FraudTable({ flags, onRefresh }: FraudTableProps) {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+            <tr className="border-b border-[#1E1E30] bg-[#12121E]">
               <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
               <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Riesgo</th>
               <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Sesiones</th>
@@ -71,16 +71,16 @@ export function FraudTable({ flags, onRefresh }: FraudTableProps) {
               <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1A3A5C]">
+          <tbody className="divide-y divide-[#1E1E30]">
             {flags.map((flag) => {
               const risk = getRiskLevel(flag)
               return (
-                <tr key={flag._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                <tr key={flag._id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-3">
                       {flag.userId?.photoUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={flag.userId.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1A3A5C]" />
+                        <img src={flag.userId.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1E1E30]" />
                       ) : (
                         <div className="h-8 w-8 rounded-full bg-red-900/40 border border-red-800/50 flex items-center justify-center text-red-400 text-xs font-bold font-bebas">
                           {(flag.userId?.displayName || 'U')[0]}
@@ -148,7 +148,7 @@ export function FraudTable({ flags, onRefresh }: FraudTableProps) {
           </DialogHeader>
           {selectedFlag && (
             <div className="space-y-4">
-              <div className="p-3 bg-[#071A2F] border border-[#1A3A5C] rounded-md text-sm">
+              <div className="p-3 bg-[#0A0A12] border border-[#1E1E30] rounded-md text-sm">
                 <p className="font-medium text-white font-exo">{selectedFlag.userId?.displayName}</p>
                 <p className="text-[#8BA4BE] font-exo text-xs mt-0.5">{selectedFlag.userId?.email}</p>
                 {selectedFlag.reviewedBy && (

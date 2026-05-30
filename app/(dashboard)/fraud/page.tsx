@@ -72,7 +72,7 @@ export default function FraudPage() {
           <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
         ) : (
           <>
-            <div className="rounded-lg border border-[#1A3A5C] overflow-hidden">
+            <div className="rounded-lg border border-[#1E1E30] overflow-hidden">
               <FraudTable flags={data?.data || []} onRefresh={fetchFraud} />
             </div>
             {data && (

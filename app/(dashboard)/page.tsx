@@ -94,7 +94,7 @@ export default async function OverviewPage() {
       />
       <div className="p-6 space-y-6">
         {!data ? (
-          <div className="p-6 bg-[#0D2540] border border-[#FF5A1F]/40 rounded-lg space-y-2">
+          <div className="p-6 bg-[#12121E] border border-[#FF5A1F]/40 rounded-lg space-y-2">
             <p className="font-rajdhani font-semibold text-[#FF5A1F] tracking-wide">Sin conexion a la base de datos</p>
             <p className="text-sm text-[#8BA4BE] font-exo">
               No se pudo conectar a MongoDB o PostgreSQL. Verifica que estas variables esten cargadas en Vercel &rarr; Settings &rarr; Environment Variables:

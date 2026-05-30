@@ -33,7 +33,7 @@ function NavLink({ href, icon: Icon, label, adminOnly }: NavLinkProps) {
         'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium font-exo transition-all duration-200',
         isActive
           ? 'bg-[#FF5A1F] text-white shadow-orange'
-          : 'text-[#8BA4BE] hover:bg-[#0D2540] hover:text-white border-l-2 border-transparent hover:border-[#FF5A1F]'
+          : 'text-[#8BA4BE] hover:bg-[#12121E] hover:text-white border-l-2 border-transparent hover:border-[#FF5A1F]'
       )}
     >
       <Icon className="h-5 w-5 shrink-0" />
@@ -52,9 +52,9 @@ export function Sidebar() {
   const isAdmin = session?.user?.isAdmin
 
   return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-[#071A2F] border-r border-[#1A3A5C] flex flex-col">
+    <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-[#0A0A12] border-r border-[#1E1E30] flex flex-col">
       {/* Logo */}
-      <div className="relative flex h-24 items-center justify-center border-b border-[#1A3A5C] overflow-hidden bg-[#071A2F]">
+      <div className="relative flex h-24 items-center justify-center border-b border-[#1E1E30] overflow-hidden bg-[#0A0A12]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/assets/logo.svg"
@@ -80,11 +80,11 @@ export function Sidebar() {
           <>
             <div className="pt-5 pb-2">
               <div className="flex items-center gap-2 px-3 mb-2">
-                <div className="flex-1 h-px bg-[#1A3A5C]" />
+                <div className="flex-1 h-px bg-[#1E1E30]" />
                 <span className="text-xs font-rajdhani font-semibold text-[#00C2FF] tracking-widest uppercase px-1">
                   Admin
                 </span>
-                <div className="flex-1 h-px bg-[#1A3A5C]" />
+                <div className="flex-1 h-px bg-[#1E1E30]" />
               </div>
             </div>
             <NavLink href="/seed" icon={Database} label="Datos de prueba" adminOnly />
@@ -93,7 +93,7 @@ export function Sidebar() {
       </nav>
 
       {/* Footer usuario */}
-      <div className="px-4 py-4 border-t border-[#1A3A5C]">
+      <div className="px-4 py-4 border-t border-[#1E1E30]">
         {session?.user && (
           <div className="flex items-center gap-3">
             {session.user.image ? (
@@ -101,7 +101,7 @@ export function Sidebar() {
               <img
                 src={session.user.image}
                 alt={session.user.name || ''}
-                className="h-9 w-9 rounded-full border-2 border-[#1A3A5C]"
+                className="h-9 w-9 rounded-full border-2 border-[#1E1E30]"
               />
             ) : (
               <div className="h-9 w-9 rounded-full bg-[#FF5A1F] flex items-center justify-center text-white text-sm font-bold font-bebas">

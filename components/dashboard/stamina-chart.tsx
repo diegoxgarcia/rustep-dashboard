@@ -19,7 +19,7 @@ export function StaminaChart({ data }: StaminaChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1A3A5C" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1E1E30" />
         <XAxis
           dataKey="week"
           tick={{ fontSize: 11, fill: '#8BA4BE', fontFamily: 'Exo 2' }}
@@ -38,8 +38,8 @@ export function StaminaChart({ data }: StaminaChartProps) {
             name === 'credited' ? 'Emitida' : 'Gastada',
           ]}
           contentStyle={{
-            background: '#0D2540',
-            border: '1px solid #1A3A5C',
+            background: '#12121E',
+            border: '1px solid #1E1E30',
             borderRadius: '8px',
             fontSize: '12px',
             color: '#ffffff',

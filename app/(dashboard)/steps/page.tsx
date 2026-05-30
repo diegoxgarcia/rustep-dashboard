@@ -65,10 +65,10 @@ export default function StepsPage() {
           <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
         ) : (
           <>
-            <div className="overflow-x-auto rounded-lg border border-[#1A3A5C]">
+            <div className="overflow-x-auto rounded-lg border border-[#1E1E30]">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                  <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                     <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
                     <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Pasos</th>
                     <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Duracion</th>
@@ -78,9 +78,9 @@ export default function StepsPage() {
                     <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1A3A5C]">
+                <tbody className="divide-y divide-[#1E1E30]">
                   {data?.data.map((log) => (
-                    <tr key={log._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                    <tr key={log._id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                       <td className="py-3 px-4">
                         {log.userId ? (
                           <div>
@@ -96,7 +96,7 @@ export default function StepsPage() {
                       <td className="py-3 px-4 text-[#8BA4BE] font-exo">{log.avgSpeedKmh?.toFixed(1) || '-'} km/h</td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-12 bg-[#1A3A5C] rounded-full h-1.5">
+                          <div className="w-12 bg-[#1E1E30] rounded-full h-1.5">
                             <div
                               className={`h-1.5 rounded-full ${log.confidenceScore >= 0.7 ? 'bg-emerald-400' : log.confidenceScore >= 0.4 ? 'bg-[#FF5A1F]' : 'bg-red-500'}`}
                               style={{ width: `${log.confidenceScore * 100}%` }}

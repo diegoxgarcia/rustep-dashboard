@@ -7,7 +7,7 @@ export default async function LoginPage() {
   if (session) redirect('/')
 
   return (
-    <div className="min-h-screen bg-[#071A2F] flex relative overflow-hidden">
+    <div className="min-h-screen bg-[#0A0A12] flex relative overflow-hidden">
 
       {/* LEFT PANEL — branding con asset */}
       <div className="hidden lg:flex flex-1 relative items-center justify-center p-12 overflow-hidden">
@@ -25,13 +25,13 @@ export default async function LoginPage() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse at center, #071A2F33 0%, #071A2F99 60%, #071A2F 100%)',
+              'radial-gradient(ellipse at center, #0A0A1233 0%, #0A0A1299 60%, #0A0A12 100%)',
           }}
         />
         {/* Right vignette para fundir con el panel de login */}
         <div
           className="absolute inset-y-0 right-0 w-32"
-          style={{ background: 'linear-gradient(to right, transparent, #071A2F)' }}
+          style={{ background: 'linear-gradient(to right, transparent, #0A0A12)' }}
         />
         {/* Logo grande centrado */}
         <div className="relative z-10 text-center space-y-4">
@@ -74,7 +74,7 @@ export default async function LoginPage() {
           </div>
 
           {/* Card */}
-          <div className="bg-[#0D2540] border border-[#1A3A5C] rounded-2xl shadow-2xl p-8 space-y-7">
+          <div className="bg-[#12121E] border border-[#1E1E30] rounded-2xl shadow-2xl p-8 space-y-7">
 
             {/* Heading */}
             <div className="space-y-1">
@@ -86,16 +86,16 @@ export default async function LoginPage() {
 
             {/* Divider */}
             <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-[#1A3A5C]" />
+              <div className="flex-1 h-px bg-[#1E1E30]" />
               <span className="text-[#8BA4BE] text-xs font-rajdhani tracking-widest uppercase">Google OAuth</span>
-              <div className="flex-1 h-px bg-[#1A3A5C]" />
+              <div className="flex-1 h-px bg-[#1E1E30]" />
             </div>
 
             {/* Boton Google */}
             <form action={signInWithGoogle}>
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 font-medium py-3.5 px-4 rounded-lg hover:bg-gray-50 active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] focus:ring-offset-2 focus:ring-offset-[#0D2540] font-exo shadow-lg"
+                className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 font-medium py-3.5 px-4 rounded-lg hover:bg-gray-50 active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] focus:ring-offset-2 focus:ring-offset-[#12121E] font-exo shadow-lg"
               >
                 <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -116,7 +116,7 @@ export default async function LoginPage() {
           </div>
 
           {/* Version tag */}
-          <p className="text-center text-[#1A3A5C] text-xs font-mono">Rustep Dashboard · Fase 1</p>
+          <p className="text-center text-[#1E1E30] text-xs font-mono">Rustep Dashboard · Fase 1</p>
         </div>
       </div>
     </div>

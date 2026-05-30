@@ -60,12 +60,12 @@ export function getStatusColor(status: string): string {
     valid: 'bg-emerald-900/40 text-emerald-400 border border-emerald-800/50',
     suspicious: 'bg-[#FF5A1F]/20 text-[#FF5A1F] border border-[#FF5A1F]/30',
     blocked: 'bg-red-900/40 text-red-400 border border-red-800/50',
-    pending: 'bg-[#1A3A5C]/60 text-[#8BA4BE] border border-[#1A3A5C]',
+    pending: 'bg-[#1E1E30]/60 text-[#8BA4BE] border border-[#1E1E30]',
     under_review: 'bg-[#00C2FF]/15 text-[#00C2FF] border border-[#00C2FF]/30',
     cleared: 'bg-emerald-900/40 text-emerald-400 border border-emerald-800/50',
     confirmed_fraud: 'bg-red-900/40 text-red-400 border border-red-800/50',
   }
-  return colors[status] || 'bg-[#1A3A5C]/60 text-[#8BA4BE] border border-[#1A3A5C]'
+  return colors[status] || 'bg-[#1E1E30]/60 text-[#8BA4BE] border border-[#1E1E30]'
 }
 
 export function getRiskLevel(flag: {

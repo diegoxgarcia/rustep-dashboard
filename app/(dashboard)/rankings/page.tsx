@@ -121,18 +121,18 @@ export default function RankingsPage() {
             <p className="font-exo text-sm">No hay datos de ranking para este periodo</p>
           </div>
         ) : (
-          <div className="rounded-lg border border-[#1A3A5C] overflow-hidden">
+          <div className="rounded-lg border border-[#1E1E30] overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest w-16">Pos.</th>
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
                   <th className="text-right py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Puntuacion</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1A3A5C]">
+              <tbody className="divide-y divide-[#1E1E30]">
                 {data.map((entry, idx) => (
-                  <tr key={entry.id} className={`transition-colors ${idx < 3 ? 'bg-[#0D2540]/50 hover:bg-[#0D2540]' : 'bg-[#071A2F] hover:bg-[#0D2540]'}`}>
+                  <tr key={entry.id} className={`transition-colors ${idx < 3 ? 'bg-[#12121E]/50 hover:bg-[#12121E]' : 'bg-[#0A0A12] hover:bg-[#12121E]'}`}>
                     <td className="py-3 px-4">
                       {idx < 3 ? (
                         <div className={`inline-flex items-center justify-center h-8 w-8 rounded-full border ${medalBg[idx]}`}>
@@ -149,7 +149,7 @@ export default function RankingsPage() {
                         <div className="flex items-center gap-3">
                           {entry.user.photoUrl ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={entry.user.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1A3A5C]" />
+                            <img src={entry.user.photoUrl} alt="" className="h-8 w-8 rounded-full border border-[#1E1E30]" />
                           ) : (
                             <div className={`h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold font-bebas ${
                               idx < 3

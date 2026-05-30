@@ -25,7 +25,7 @@ export function StepsChart({ data }: StepsChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={formatted} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#1A3A5C" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#1E1E30" />
         <XAxis
           dataKey="label"
           tick={{ fontSize: 11, fill: '#8BA4BE', fontFamily: 'Exo 2' }}
@@ -43,8 +43,8 @@ export function StepsChart({ data }: StepsChartProps) {
           formatter={(value) => [(Number(value) || 0).toLocaleString('es-AR'), 'Pasos']}
           labelStyle={{ color: '#ffffff', fontWeight: 600, fontFamily: 'Exo 2' }}
           contentStyle={{
-            background: '#0D2540',
-            border: '1px solid #1A3A5C',
+            background: '#12121E',
+            border: '1px solid #1E1E30',
             borderRadius: '8px',
             fontSize: '12px',
             color: '#ffffff',
@@ -56,7 +56,7 @@ export function StepsChart({ data }: StepsChartProps) {
           stroke="#FF5A1F"
           strokeWidth={2}
           dot={false}
-          activeDot={{ r: 5, fill: '#FF5A1F', stroke: '#071A2F', strokeWidth: 2 }}
+          activeDot={{ r: 5, fill: '#FF5A1F', stroke: '#0A0A12', strokeWidth: 2 }}
         />
       </LineChart>
     </ResponsiveContainer>

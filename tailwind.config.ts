@@ -15,9 +15,9 @@ const config: Config = {
         brand: {
           orange: '#FF5A1F',
           'orange-dark': '#E54E16',
-          navy: '#071A2F',
-          surface: '#0D2540',
-          border: '#1A3A5C',
+          navy: '#0A0A12',
+          surface: '#12121E',
+          border: '#1E1E30',
           cyan: '#00C2FF',
           'text-secondary': '#8BA4BE',
         },

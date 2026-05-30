@@ -23,7 +23,7 @@ export function NavItem({ href, icon: Icon, label, adminOnly }: NavItemProps) {
         'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium font-exo transition-all duration-200',
         isActive
           ? 'bg-[#FF5A1F] text-white shadow-orange'
-          : 'text-[#8BA4BE] hover:bg-[#0D2540] hover:text-white border-l-2 border-transparent hover:border-[#FF5A1F]'
+          : 'text-[#8BA4BE] hover:bg-[#12121E] hover:text-white border-l-2 border-transparent hover:border-[#FF5A1F]'
       )}
     >
       <Icon className="h-5 w-5 shrink-0" />

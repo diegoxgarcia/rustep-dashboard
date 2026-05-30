@@ -116,10 +116,10 @@ export function UsersTable() {
         <div className="flex items-center justify-center h-48 text-[#8BA4BE] font-exo">Cargando...</div>
       ) : (
         <>
-          <div className="overflow-x-auto rounded-lg border border-[#1A3A5C]">
+          <div className="overflow-x-auto rounded-lg border border-[#1E1E30]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario</th>
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Actividad</th>
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Estado</th>
@@ -128,14 +128,14 @@ export function UsersTable() {
                   <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1A3A5C]">
+              <tbody className="divide-y divide-[#1E1E30]">
                 {data?.data.map((user) => (
-                  <tr key={user._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                  <tr key={user._id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                     <td className="py-3 px-4">
                       <Link href={`/users/${user._id}`} className="flex items-center gap-3 hover:text-[#FF5A1F] transition-colors">
                         {user.photoUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={user.photoUrl} alt="" className="h-9 w-9 rounded-full border border-[#1A3A5C]" />
+                          <img src={user.photoUrl} alt="" className="h-9 w-9 rounded-full border border-[#1E1E30]" />
                         ) : (
                           <div className="h-9 w-9 rounded-full bg-[#FF5A1F]/20 border border-[#FF5A1F]/40 flex items-center justify-center text-[#FF5A1F] text-sm font-bold font-bebas">
                             {user.displayName[0]}

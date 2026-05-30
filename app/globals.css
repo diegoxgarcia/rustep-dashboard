@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #071A2F;
+  --background: #0A0A12;
   --foreground: #ffffff;
 }
 
@@ -20,11 +20,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #071A2F;
+  background: #0A0A12;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1A3A5C;
+  background: #1E1E30;
   border-radius: 3px;
 }
 
@@ -51,15 +51,15 @@ body {
   }
 
   .bg-brand-navy {
-    background-color: #071A2F;
+    background-color: #0A0A12;
   }
 
   .bg-brand-surface {
-    background-color: #0D2540;
+    background-color: #12121E;
   }
 
   .border-brand {
-    border-color: #1A3A5C;
+    border-color: #1E1E30;
   }
 
   .text-brand-orange {

@@ -30,7 +30,7 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
 
   if (bannerSrc) {
     return (
-      <header className="relative overflow-hidden border-b border-[#1A3A5C]" style={{ minHeight: '160px' }}>
+      <header className="relative overflow-hidden border-b border-[#1E1E30]" style={{ minHeight: '160px' }}>
         {/* Asset image — decorative background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -44,7 +44,7 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to right, #071A2F 45%, #071A2F99 75%, transparent 100%)',
+            background: 'linear-gradient(to right, #0A0A12 45%, #0A0A1299 75%, transparent 100%)',
           }}
         />
         {/* Top-right action bar */}
@@ -67,7 +67,7 @@ export function Header({ title, description, bannerSrc, bannerPosition = 'right 
 
   // Fallback: slim bar without banner
   return (
-    <header className="h-16 border-b border-[#1A3A5C] bg-[#0D2540] flex items-center justify-between px-6">
+    <header className="h-16 border-b border-[#1E1E30] bg-[#12121E] flex items-center justify-between px-6">
       <div>
         <h2 className="text-xl font-bebas tracking-wider text-white leading-none">{title}</h2>
         {description && (

@@ -15,9 +15,9 @@ export default function DashboardError({
 
   return (
     <div className="p-8 max-w-2xl">
-      <div className="bg-[#0D2540] border border-[#FF5A1F]/40 rounded-lg p-6 space-y-4">
+      <div className="bg-[#12121E] border border-[#FF5A1F]/40 rounded-lg p-6 space-y-4">
         <h2 className="text-lg font-rajdhani font-semibold text-[#FF5A1F] tracking-wide">Error en el dashboard</h2>
-        <div className="bg-[#071A2F] border border-[#1A3A5C] rounded p-3 font-mono text-xs text-[#8BA4BE] overflow-auto max-h-60 whitespace-pre-wrap">
+        <div className="bg-[#0A0A12] border border-[#1E1E30] rounded p-3 font-mono text-xs text-[#8BA4BE] overflow-auto max-h-60 whitespace-pre-wrap">
           {error.message || 'Error desconocido'}
         </div>
         {error.stack && (

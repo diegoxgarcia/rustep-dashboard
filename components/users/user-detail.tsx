@@ -42,7 +42,7 @@ export function UserDetail({ user, stepsLogs, fraudFlag, staminaTransactions, st
         <div className="flex items-center gap-4">
           {user.photoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={user.photoUrl} alt="" className="h-16 w-16 rounded-full border-2 border-[#1A3A5C]" />
+            <img src={user.photoUrl} alt="" className="h-16 w-16 rounded-full border-2 border-[#1E1E30]" />
           ) : (
             <div className="h-16 w-16 rounded-full bg-[#FF5A1F]/20 border-2 border-[#FF5A1F]/40 flex items-center justify-center text-[#FF5A1F] text-2xl font-bold font-bebas">
               {user.displayName[0]}
@@ -168,7 +168,7 @@ export function UserDetail({ user, stepsLogs, fraudFlag, staminaTransactions, st
               </div>
             </div>
             {fraudFlag.reviewNotes && (
-              <div className="mt-3 p-3 bg-[#071A2F] border border-[#1A3A5C] rounded text-sm text-[#8BA4BE] font-exo">
+              <div className="mt-3 p-3 bg-[#0A0A12] border border-[#1E1E30] rounded text-sm text-[#8BA4BE] font-exo">
                 <p className="font-medium text-white mb-1">Notas:</p>
                 <p>{fraudFlag.reviewNotes}</p>
               </div>
@@ -185,7 +185,7 @@ export function UserDetail({ user, stepsLogs, fraudFlag, staminaTransactions, st
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Pasos</th>
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Duracion</th>
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Velocidad</th>
@@ -194,9 +194,9 @@ export function UserDetail({ user, stepsLogs, fraudFlag, staminaTransactions, st
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1A3A5C]">
+              <tbody className="divide-y divide-[#1E1E30]">
                 {stepsLogs.map((log) => (
-                  <tr key={log._id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                  <tr key={log._id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                     <td className="py-2 px-4 font-medium text-white font-exo">{formatNumber(log.stepsCount)}</td>
                     <td className="py-2 px-4 text-[#8BA4BE] font-exo">{log.sessionDurationMinutes} min</td>
                     <td className="py-2 px-4 text-[#8BA4BE] font-exo">{log.avgSpeedKmh?.toFixed(1) || '-'} km/h</td>
@@ -223,18 +223,18 @@ export function UserDetail({ user, stepsLogs, fraudFlag, staminaTransactions, st
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Tipo</th>
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Cantidad</th>
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Descripcion</th>
                   <th className="text-left py-2 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1A3A5C]">
+              <tbody className="divide-y divide-[#1E1E30]">
                 {staminaTransactions.map((tx) => (
-                  <tr key={tx.id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                  <tr key={tx.id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                     <td className="py-2 px-4">
-                      <span className="text-xs bg-[#0D2540] border border-[#1A3A5C] text-[#00C2FF] px-2 py-0.5 rounded font-mono font-rajdhani">
+                      <span className="text-xs bg-[#12121E] border border-[#1E1E30] text-[#00C2FF] px-2 py-0.5 rounded font-mono font-rajdhani">
                         {tx.type}
                       </span>
                     </td>

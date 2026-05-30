@@ -35,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${bebasNeue.variable} ${exo2.variable} ${rajdhani.variable}`}>
-      <body className="bg-[#071A2F] font-exo text-white antialiased">
+      <body className="bg-[#0A0A12] font-exo text-white antialiased">
         <SessionProvider>
           {children}
         </SessionProvider>

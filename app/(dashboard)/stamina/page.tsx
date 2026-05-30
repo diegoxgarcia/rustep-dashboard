@@ -122,7 +122,7 @@ export default function StaminaPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-[#1A3A5C] bg-[#0D2540]">
+                      <tr className="border-b border-[#1E1E30] bg-[#12121E]">
                         <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Tipo</th>
                         <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Cantidad</th>
                         <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Usuario ID</th>
@@ -130,11 +130,11 @@ export default function StaminaPage() {
                         <th className="text-left py-3 px-4 text-xs font-rajdhani font-semibold text-[#8BA4BE] uppercase tracking-widest">Fecha</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#1A3A5C]">
+                    <tbody className="divide-y divide-[#1E1E30]">
                       {data?.data.map((entry) => (
-                        <tr key={entry.id} className="bg-[#071A2F] hover:bg-[#0D2540] transition-colors">
+                        <tr key={entry.id} className="bg-[#0A0A12] hover:bg-[#12121E] transition-colors">
                           <td className="py-2 px-4">
-                            <span className="text-xs bg-[#0D2540] border border-[#1A3A5C] text-[#00C2FF] px-2 py-0.5 rounded font-mono font-rajdhani">
+                            <span className="text-xs bg-[#12121E] border border-[#1E1E30] text-[#00C2FF] px-2 py-0.5 rounded font-mono font-rajdhani">
                               {entry.type}
                             </span>
                           </td>

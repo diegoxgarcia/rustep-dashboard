@@ -16,7 +16,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 w-full items-center justify-between rounded-md border border-[#1A3A5C] bg-[#071A2F] px-3 py-2 text-sm text-white font-exo ring-offset-background placeholder:text-[#8BA4BE] focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] focus:ring-offset-2 focus:ring-offset-[#071A2F] disabled:cursor-not-allowed disabled:opacity-50 hover:border-[#FF5A1F]/50 transition-colors',
+      'flex h-10 w-full items-center justify-between rounded-md border border-[#1E1E30] bg-[#0A0A12] px-3 py-2 text-sm text-white font-exo ring-offset-background placeholder:text-[#8BA4BE] focus:outline-none focus:ring-2 focus:ring-[#FF5A1F] focus:ring-offset-2 focus:ring-offset-[#0A0A12] disabled:cursor-not-allowed disabled:opacity-50 hover:border-[#FF5A1F]/50 transition-colors',
       className
     )}
     {...props}
@@ -37,7 +37,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[#1A3A5C] bg-[#0D2540] text-white shadow-lg shadow-black/40 animate-in fade-in-80',
+        'relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-[#1E1E30] bg-[#12121E] text-white shadow-lg shadow-black/40 animate-in fade-in-80',
         position === 'popper' && 'translate-y-1',
         className
       )}
@@ -65,7 +65,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-exo text-white outline-none focus:bg-[#1A3A5C] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-exo text-white outline-none focus:bg-[#1E1E30] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors',
       className
     )}
     {...props}
