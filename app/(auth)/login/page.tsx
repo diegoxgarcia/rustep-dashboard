@@ -34,20 +34,14 @@ export default async function LoginPage() {
           style={{ background: 'linear-gradient(to right, transparent, #0A0A12)' }}
         />
         {/* Logo grande centrado */}
-        <div className="relative z-10 text-center space-y-4">
+        <div className="relative z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo.svg"
             alt="Rustep"
-            className="w-48 h-48 mx-auto drop-shadow-2xl"
-            style={{ filter: 'drop-shadow(0 0 32px #FF5A1F66)' }}
+            className="w-56 h-56 mx-auto drop-shadow-2xl"
+            style={{ filter: 'drop-shadow(0 0 40px #FF5A1F88)' }}
           />
-          <h1 className="font-bebas text-[#FF5A1F] text-7xl tracking-widest leading-none drop-shadow-lg">
-            RUSTEP
-          </h1>
-          <p className="font-rajdhani text-[#00C2FF] text-base tracking-[0.4em] uppercase font-semibold">
-            Energía en cada paso
-          </p>
         </div>
       </div>
 
