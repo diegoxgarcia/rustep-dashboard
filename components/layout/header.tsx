@@ -8,11 +8,61 @@ import { signOutAction } from '@/lib/actions'
 interface HeaderProps {
   title: string
   description?: string
+  bannerSrc?: string        // path to /assets/banner-xxx.svg
+  bannerPosition?: string   // object-position, e.g. "right center"
 }
 
-export function Header({ title, description }: HeaderProps) {
+export function Header({ title, description, bannerSrc, bannerPosition = 'right center' }: HeaderProps) {
   const { data: session } = useSession()
 
+  if (bannerSrc) {
+    return (
+      <header className="relative overflow-hidden border-b border-[#1A3A5C]" style={{ minHeight: '160px' }}>
+        {/* Asset image — right side, fades into dark */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bannerSrc}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ objectPosition: bannerPosition, opacity: 0.18 }}
+        />
+        {/* Gradient: solid dark on left, transparent on right so the image shows */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, #071A2F 45%, #071A2F99 75%, transparent 100%)',
+          }}
+        />
+        {/* Top-right action bar */}
+        <div className="absolute top-0 right-0 flex items-center gap-4 px-6 py-3">
+          {session?.user && (
+            <span className="text-xs text-[#8BA4BE] font-exo hidden sm:block">{session.user.email}</span>
+          )}
+          <form action={signOutAction}>
+            <Button
+              variant="outline"
+              size="sm"
+              type="submit"
+              className="border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white font-exo font-medium transition-all duration-200"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Salir
+            </Button>
+          </form>
+        </div>
+        {/* Title content */}
+        <div className="relative z-10 px-8 pt-10 pb-6">
+          <h1 className="text-4xl font-bebas tracking-widest text-white leading-none drop-shadow-md">{title}</h1>
+          {description && (
+            <p className="text-sm text-[#8BA4BE] font-exo mt-1.5 tracking-wide">{description}</p>
+          )}
+        </div>
+      </header>
+    )
+  }
+
+  // Fallback: slim bar without banner (used for simple pages)
   return (
     <header className="h-16 border-b border-[#1A3A5C] bg-[#0D2540] flex items-center justify-between px-6">
       <div>

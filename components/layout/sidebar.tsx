@@ -12,7 +12,6 @@ import {
   ShieldAlert,
   Trophy,
   Database,
-  Activity,
   LucideIcon,
 } from 'lucide-react'
 
@@ -55,14 +54,18 @@ export function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-[#071A2F] border-r border-[#1A3A5C] flex flex-col">
       {/* Logo */}
-      <div className="flex h-20 items-center gap-3 px-6 border-b border-[#1A3A5C]">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#FF5A1F]/20 border border-[#FF5A1F]/40">
-          <Activity className="h-6 w-6 text-[#FF5A1F]" />
-        </div>
-        <div>
-          <h1 className="text-[#FF5A1F] font-bebas text-2xl leading-none tracking-wider">RUSTEP</h1>
-          <p className="text-[#00C2FF] font-rajdhani text-xs tracking-widest uppercase mt-0.5">Dashboard</p>
-        </div>
+      <div className="relative flex h-24 items-center justify-center border-b border-[#1A3A5C] overflow-hidden bg-[#071A2F]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/assets/logo.svg"
+          alt="Rustep"
+          className="absolute inset-0 w-full h-full object-contain opacity-90"
+          style={{ padding: '6px' }}
+        />
+        {/* Subtle bottom label */}
+        <p className="absolute bottom-1.5 left-0 right-0 text-center text-[#00C2FF] font-rajdhani text-[10px] tracking-[0.25em] uppercase opacity-80">
+          Dashboard
+        </p>
       </div>
 
       {/* Nav */}

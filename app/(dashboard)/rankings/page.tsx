@@ -73,7 +73,7 @@ export default function RankingsPage() {
 
   return (
     <div>
-      <Header title="Rankings" description="Clasificaciones semanales y totales" />
+      <Header title="Rankings" description="Clasificaciones semanales y totales" bannerSrc="/assets/banner-rankings.svg" bannerPosition="center center" />
       <div className="p-6 space-y-4">
         <div className="flex flex-wrap gap-3 items-center">
           <Select value={category} onValueChange={setCategory}>

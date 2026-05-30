@@ -45,7 +45,7 @@ export default function FraudPage() {
 
   return (
     <div>
-      <Header title="Fraude" description="Usuarios con actividad sospechosa detectada" />
+      <Header title="Fraude" description="Usuarios con actividad sospechosa detectada" bannerSrc="/assets/banner-fraud.svg" bannerPosition="center center" />
       <div className="p-6 space-y-4">
         <div className="flex gap-3">
           <Select

@@ -89,6 +89,8 @@ export default async function OverviewPage() {
       <Header
         title="Overview"
         description={`Bienvenido, ${session?.user?.name || 'Admin'}`}
+        bannerSrc="/assets/banner-overview.svg"
+        bannerPosition="right center"
       />
       <div className="p-6 space-y-6">
         {!data ? (

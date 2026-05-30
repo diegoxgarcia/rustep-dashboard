@@ -39,7 +39,7 @@ export default function StepsPage() {
 
   return (
     <div>
-      <Header title="Sesiones de pasos" description="Todas las sesiones registradas" />
+      <Header title="Sesiones de Pasos" description="Todas las sesiones registradas" bannerSrc="/assets/banner-steps.svg" bannerPosition="center center" />
       <div className="p-6 space-y-4">
         <div className="flex gap-3">
           <Select

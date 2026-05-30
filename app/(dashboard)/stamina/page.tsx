@@ -58,7 +58,7 @@ export default function StaminaPage() {
 
   return (
     <div>
-      <Header title="Stamina" description="Ledger de todas las transacciones de stamina" />
+      <Header title="Stamina" description="Ledger de todas las transacciones de stamina" bannerSrc="/assets/banner-stamina.svg" bannerPosition="center center" />
       <div className="p-6 space-y-6">
         {error && (
           <div className="p-4 bg-[#FF5A1F]/10 border border-[#FF5A1F]/40 rounded-lg text-[#FF5A1F] text-sm font-exo">{error}</div>
